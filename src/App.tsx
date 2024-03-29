@@ -6,6 +6,7 @@ import NavBar from "./components/navbar/NavBar";
 import HomePage from "./pages/home_page/HomePage";
 import LoginPage from "./pages/login_page/LoginPage";
 import RegisterPage from "./pages/register_page/RegisterPage";
+import ProductCategoriesPage from "./pages/product_categories_page/ProductCategoriesPage";
 import Footer from "./components/footer/Footer";
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/authentication/login" element={<LoginPage />}></Route>
                     <Route path="/authentication/register" element={<RegisterPage />}></Route>
+                    <Route path="/catalog/life-style" element={<ProductCategoriesPage />}></Route>
                 </Routes>
 
                 <div className={style.wrapper}>

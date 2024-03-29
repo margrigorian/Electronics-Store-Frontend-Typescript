@@ -53,7 +53,7 @@ export interface IUseProductsStore {
     selectedQuantity: string;
     selectedPrice: string;
     // для отрисовки на странице ProductCategoriesPage
-    categories: (ICategories | string)[] | null; // string добавляется на фронте - элемент "All Products"
+    categories: ICategories[] | null; // string добавляется на фронте - элемент "All Products"
     // productListPage
     products: IProductListInfo | null; // arr
     // для страницы Admin Page, общее количество товаров в базе
@@ -78,13 +78,13 @@ export interface IUseProductsStore {
     setSelectedQuantity: (quantity: string) => void;
     setSelectedPrice: (price: string) => void;
     // PRODUCT LIST
-    setCategories: (arr: (ICategories | string)[]) => void;
+    setCategories: (arr: ICategories[]) => void;
     setProducts: (arr: IProductListInfo | null) => void;
     setLength: (length: number) => void;
     // ДЛЯ Product Page
     setProduct: (product: IProductWithCommentsAndRates | null) => void;
     setQuantity: (value: number) => void;
-    setUserRate: (value: number) => void;
+    setUserRate: (value: number | null) => void;
     setUserComment: (comment: string) => void;
     setEvaluation: (action: string | null) => void;
     setError: (message: string | null) => void;
@@ -125,8 +125,8 @@ interface ICategoryProduct {
     price: number;
 }
 
-interface ICategories extends ICategory {
-    products: ICategoryProduct[];
+export interface ICategories extends ICategory {
+    products: (ICategoryProduct | string)[];
 }
 
 interface IProductListInfo {

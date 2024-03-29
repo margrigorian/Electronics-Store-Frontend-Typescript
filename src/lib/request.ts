@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ILoginForm, IRegistrationForm, IUser } from "./types";
+import { ILoginForm, IRegistrationForm, IUser, ICategories } from "./types";
 
 interface IResponse<T> {
     data: T | null;
@@ -49,4 +49,17 @@ async function makeRegistration(
     }
 }
 
-export { makeAuthorization, makeRegistration };
+async function getFeildOfApplicationCategories(
+    fieldOfApplication: string
+): Promise<IResponse<{ categories: ICategories[] }> | undefined> {
+    // string "Add Products" на ProductCategoriesPage
+    try {
+        const data = await axios.get(`http://localhost:3001/catalog/${fieldOfApplication}`);
+
+        return data.data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { makeAuthorization, makeRegistration, getFeildOfApplicationCategories };
