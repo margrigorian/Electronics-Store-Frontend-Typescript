@@ -32,10 +32,9 @@ export interface IUseUserStore {
     setError: (message: string | null) => void;
 }
 
-interface IUser {
+export interface IUser {
     id: string;
     username: string;
-    password?: string;
     status: string;
     token: string;
 }
@@ -187,4 +186,18 @@ export interface IUseFilters {
     setOrder: (value: string) => void;
     setPage: (value: number) => void;
     setLimit: (value: number) => void;
+}
+
+// LOGIN
+
+export interface ILoginForm {
+    email: string;
+    password: string;
+}
+
+export interface IRegistrationForm {
+    username: string;
+    email: string;
+    password: string;
+    repeatedPassword?: string;
 }
