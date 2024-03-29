@@ -2,6 +2,8 @@ import style from "./NavBar.module.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useStateManagment, useUser, useProducts, useFilters } from "../../store/store";
+import NavBarDrawer from "../navbar_drawer/NavBarDrawer";
+import SearchDrawer from "../search_drawer/SearchDrawer";
 import * as Icon from "react-bootstrap-icons";
 
 const NavBar: React.FC = () => {
@@ -30,6 +32,8 @@ const NavBar: React.FC = () => {
 
     return (
         <div>
+            <NavBarDrawer />
+            <SearchDrawer />
             <div className={style.navBar}>
                 <div className={style.navbarList}>
                     <NavLink
@@ -115,7 +119,7 @@ const NavBar: React.FC = () => {
                                 ? user.status === "admin"
                                     ? "admin/edit-page"
                                     : "/user/basket"
-                                : ""
+                                : window.location
                         }
                         onClick={() => {
                             // необходимо после перехода с Product Page
