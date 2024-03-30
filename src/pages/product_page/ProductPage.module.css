@@ -1,0 +1,144 @@
+.container {
+    min-height: 100vh;
+    padding: 40px 0;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    background-color: rgb(246, 245, 245);
+}
+.productContainer {
+    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px 40px 20px 20px;
+}
+.imagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 2;
+}
+.image {
+    width: 320px;
+    height: 300px;
+}
+.productDescription {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.title {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+.priceAndRateContainer {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 18px;
+}
+.price {
+    font-weight: bold;
+}
+.rateContainer {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    color: rgb(53, 52, 52);
+}
+.star {
+    margin: 0 10px;
+    color: rgb(166, 165, 165);
+}
+.description {
+    color: rgb(90, 88, 88);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.quantityContainer {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+.quantityTitle {
+    margin-right: 20px;
+    color: rgb(6, 130, 171);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.minusButton {
+    padding: 0 5px 1px 5px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.plusButton {
+    padding: 1px 5px 0 5px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.quantity {
+    width: 20px;
+    margin: 0 4px;
+    text-align: center;
+}
+.outOfStockText {
+    color: rgb(6, 130, 171, 0.6);
+    font-size: 14px;
+}
+.pleaseLoginText {
+    color: rgb(6, 130, 171, 0.6);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.addButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.addProductButton {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid rgb(6, 130, 171);
+    border-radius: 10px;
+    background-color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+.addProductButton:hover {
+    background-color: rgb(6, 130, 171);
+    color: white;
+}
+.disabledButton {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid rgb(210, 211, 211);
+    border-radius: 10px;
+    background-color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+.iconsContainer {
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(6, 130, 171);
+}
+.cursor {
+    cursor: pointer;
+}
+.loading {
+    margin: 50px 0 0 40px;
+    font-size: 25px;
+    color: rgb(191, 194, 194);
+    letter-spacing: 0.5px;
+}

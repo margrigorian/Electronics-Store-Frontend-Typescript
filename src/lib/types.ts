@@ -144,13 +144,13 @@ interface IProduct {
     image: string;
     price: number;
     quantity: number;
-    rate: string | null; // не при всех запросах включен
+    avgRate: string | null; // не при всех запросах включен
     feildOfApplication: string;
     category: string;
     subcategory: string;
 }
 
-interface IProductWithCommentsAndRates extends IProduct {
+export interface IProductWithCommentsAndRates extends IProduct {
     comments: ICommentsWithRates[];
     rates?: IRates[];
 }

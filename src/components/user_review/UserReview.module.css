@@ -1,0 +1,67 @@
+.userReviewContainer {
+    margin: 0 40px 40px 40px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    letter-spacing: 0.5px;
+}
+.userReviewTitle {
+    text-align: center;
+}
+.userRateContainer {
+    margin: 40px 0 20px 0;
+    display: flex;
+    align-items: center;
+}
+.messageToUser {
+    margin-left: 30px;
+    color: rgb(6, 130, 171, 0.6);
+    font-size: 14px;
+}
+.userCommentContainer {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.commentTextArea {
+    height: 200px;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: rgb(53, 52, 52);
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    overflow: auto;
+    outline: none;
+    resize: none;
+}
+.commentTextArea::-webkit-input-placeholder {
+    color: rgb(190, 189, 189);
+}
+.addCommentButton {
+    margin: 30px 0;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(6, 130, 171);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+.disabledAddCommentButton {
+    margin: 30px 0;
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(166, 165, 165);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    align-self: flex-end;
+}

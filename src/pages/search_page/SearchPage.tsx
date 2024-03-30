@@ -158,7 +158,7 @@ const SearchPage: React.FC = () => {
                                         <Product
                                             title={el.title}
                                             price={el.price}
-                                            rate={el.rate}
+                                            avgRate={el.avgRate}
                                             image={el.image}
                                         />
                                     </NavLink>

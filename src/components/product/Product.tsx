@@ -5,11 +5,11 @@ import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
 interface ProductProps {
     title: string;
     price: number;
-    rate: string | null;
+    avgRate: string | null;
     image: string;
 }
 
-const Product: React.FC<ProductProps> = ({ title, price, rate, image }) => {
+const Product: React.FC<ProductProps> = ({ title, price, avgRate, image }) => {
     return (
         <div className={style.product}>
             <div className={style.productNameContainer}>
@@ -19,13 +19,13 @@ const Product: React.FC<ProductProps> = ({ title, price, rate, image }) => {
             <div className={style.infoContainer}>
                 <div className={style.price}>{`$ ${price}`}</div>
                 <div>
-                    {rate !== null ? (
+                    {avgRate !== null ? (
                         <div className={style.rateContainer}>
                             <StarBorderPurple500Icon
                                 sx={{ fontSize: "22px", color: "rgb(6, 130, 171)" }}
                             />
                             &nbsp;
-                            <div>{Number(rate).toFixed(1)}</div>
+                            <div>{Number(avgRate).toFixed(1)}</div>
                         </div>
                     ) : (
                         <StarBorderPurple500Icon
