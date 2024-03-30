@@ -82,4 +82,30 @@ async function getProductList(
     }
 }
 
-export { makeAuthorization, makeRegistration, getFeildOfApplicationCategories, getProductList };
+async function getSearchProductList(
+    search: string,
+    subcategory: string,
+    minPrice: number | string,
+    maxPrice: number | string,
+    order: string,
+    page: number,
+    limit: number
+): Promise<IResponse<{ data: IProductListInfo }> | undefined> {
+    try {
+        const data = await axios.get(
+            `http://localhost:3001/catalog/search?q=${search}&subcategory=${subcategory}&minPrice=${minPrice}&maxPrice=${maxPrice}&order=${order}&page=${page}&limit=${limit}`
+        );
+
+        return data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export {
+    makeAuthorization,
+    makeRegistration,
+    getFeildOfApplicationCategories,
+    getProductList,
+    getSearchProductList
+};

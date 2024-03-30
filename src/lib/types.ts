@@ -180,7 +180,7 @@ export interface IUseFilters {
     limit: number;
 
     setSearch: (value: string) => void;
-    setSubcategories: (arr: string[]) => void;
+    setSubcategories: (arr: string[] | null) => void;
     setPriceMin: (value: number) => void;
     setPriceMax: (value: number) => void;
     setOrder: (value: string) => void;
