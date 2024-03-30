@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ILoginForm, IRegistrationForm, IUser, ICategories } from "./types";
+import { ILoginForm, IRegistrationForm, IUser, ICategories, IProductListInfo } from "./types";
 
 interface IResponse<T> {
     data: T | null;
@@ -62,4 +62,24 @@ async function getFeildOfApplicationCategories(
     }
 }
 
-export { makeAuthorization, makeRegistration, getFeildOfApplicationCategories };
+async function getProductList(
+    category: string,
+    subcategory: string,
+    minPrice: number | string,
+    maxPrice: number | string,
+    order: string,
+    page: number,
+    limit: number
+): Promise<IResponse<{ data: IProductListInfo }> | undefined> {
+    try {
+        const data = await axios.get(
+            `http://localhost:3001/catalog/product-list/${category}?subcategory=${subcategory}&minPrice=${minPrice}&maxPrice=${maxPrice}&order=${order}&page=${page}&limit=${limit}`
+        );
+
+        return data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { makeAuthorization, makeRegistration, getFeildOfApplicationCategories, getProductList };

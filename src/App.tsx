@@ -7,6 +7,7 @@ import HomePage from "./pages/home_page/HomePage";
 import LoginPage from "./pages/login_page/LoginPage";
 import RegisterPage from "./pages/register_page/RegisterPage";
 import ProductCategoriesPage from "./pages/product_categories_page/ProductCategoriesPage";
+import ProductListPage from "./pages/product_list_page/ProductListPage";
 import Footer from "./components/footer/Footer";
 
 const App: React.FC = () => {
@@ -21,6 +22,10 @@ const App: React.FC = () => {
                     <Route path="/authentication/login" element={<LoginPage />}></Route>
                     <Route path="/authentication/register" element={<RegisterPage />}></Route>
                     <Route path="/catalog/life-style" element={<ProductCategoriesPage />}></Route>
+                    <Route
+                        path="/catalog/product-list/:category"
+                        element={<ProductListPage />}
+                    ></Route>
                 </Routes>
 
                 <div className={style.wrapper}>

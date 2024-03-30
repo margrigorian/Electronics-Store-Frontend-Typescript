@@ -88,8 +88,8 @@ export const useProducts = create<IUseProductsStore>(set => ({
 export const useFilters = create<IUseFilters>(set => ({
     search: "",
     subcategories: null, // массив
-    priceMin: null, // чтобы отрисовывать в SLIDER, значение string выдает ошибку
-    priceMax: null,
+    priceMin: 0, // чтобы отрисовывать в SLIDER, значение string или null не подходят в качестве начального value
+    priceMax: 1,
     order: "", // для request, null выдаст ошибку 406
     page: 1,
     limit: 8,

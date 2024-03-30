@@ -55,7 +55,7 @@ export interface IUseProductsStore {
     // для отрисовки на странице ProductCategoriesPage
     categories: ICategories[] | null; // string добавляется на фронте - элемент "All Products"
     // productListPage
-    products: IProductListInfo | null; // arr
+    products: IProduct[] | IProductWithCommentsAndRates[] | null; // arr
     // для страницы Admin Page, общее количество товаров в базе
     length: number | null;
     // productPage
@@ -79,7 +79,7 @@ export interface IUseProductsStore {
     setSelectedPrice: (price: string) => void;
     // PRODUCT LIST
     setCategories: (arr: ICategories[]) => void;
-    setProducts: (arr: IProductListInfo | null) => void;
+    setProducts: (arr: IProduct[] | IProductWithCommentsAndRates[] | null) => void;
     setLength: (length: number) => void;
     // ДЛЯ Product Page
     setProduct: (product: IProductWithCommentsAndRates | null) => void;
@@ -129,7 +129,7 @@ export interface ICategories extends ICategory {
     products: (ICategoryProduct | string)[];
 }
 
-interface IProductListInfo {
+export interface IProductListInfo {
     products: IProduct[] | IProductWithCommentsAndRates[]; // второе для allProductsController
     subcategories: string[];
     priceMin: number;
@@ -144,13 +144,13 @@ interface IProduct {
     image: string;
     price: number;
     quantity: number;
+    rate: string | null; // не при всех запросах включен
     feildOfApplication: string;
     category: string;
     subcategory: string;
 }
 
 interface IProductWithCommentsAndRates extends IProduct {
-    avgRating: number | null;
     comments: ICommentsWithRates[];
     rates?: IRates[];
 }
@@ -173,16 +173,16 @@ interface IRates {
 export interface IUseFilters {
     search: string;
     subcategories: string[] | null; // массив
-    priceMin: number | null; // чтобы отрисовывать в SLIDER, значение string выдает ошибку
-    priceMax: number | null;
+    priceMin: number; // чтобы отрисовывать в SLIDER, значение string выдает ошибку
+    priceMax: number;
     order: string; // для request, null выдаст ошибку 406
     page: number;
     limit: number;
 
     setSearch: (value: string) => void;
     setSubcategories: (arr: string[]) => void;
-    setPriceMin: (value: number | null) => void;
-    setPriceMax: (value: number | null) => void;
+    setPriceMin: (value: number) => void;
+    setPriceMax: (value: number) => void;
     setOrder: (value: string) => void;
     setPage: (value: number) => void;
     setLimit: (value: number) => void;
