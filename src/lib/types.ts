@@ -71,7 +71,7 @@ export interface IUseProductsStore {
     // для страницы Admin Page, общее количество товаров в базе
     length: number | null;
     // productPage
-    product: IProductWithCommentsAndRates | null;
+    product: IProduct | IProductWithCommentsAndRates | null;
     // для контроля выбора количества товара на Product Page
     quantity: number;
     userRate: number | null;
@@ -94,7 +94,7 @@ export interface IUseProductsStore {
     setProducts: (arr: IProduct[] | IProductWithCommentsAndRates[] | null) => void;
     setLength: (length: number) => void;
     // ДЛЯ Product Page
-    setProduct: (product: IProductWithCommentsAndRates | null) => void;
+    setProduct: (product: IProduct | IProductWithCommentsAndRates | null) => void;
     setQuantity: (value: number) => void;
     setUserRate: (value: number | null) => void;
     setUserComment: (comment: string) => void;
@@ -138,6 +138,7 @@ interface IProduct {
     feildOfApplication: string;
     category: string;
     subcategory: string;
+    comments?: ICommentsWithRates[]; // лишнее, требуется в reviews
 }
 
 export interface IProductWithCommentsAndRates extends IProduct {
@@ -205,7 +206,7 @@ export interface IAllProductsWithStructure extends IProductListInfo {
 }
 
 export interface IPostOrPutProductForm {
-    id?: number; // необходим в случае PUT
+    id?: string; // необходим в случае
     image: File;
     title: string;
     description: string;

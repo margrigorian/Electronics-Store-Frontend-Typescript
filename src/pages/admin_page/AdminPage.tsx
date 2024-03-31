@@ -5,6 +5,7 @@ import { useStateManagment, useUser, useProducts, useFilters } from "../../store
 import { getAllProductsWithCategoryStructure } from "../../lib/request";
 import PostProductForm from "../../components/post_product_form/PostProductForm";
 import FilterDrawer from "../../components/filter_drawer/FilterDrawer";
+import AdminProductList from "../../components/admin_product_list/AdminProductList";
 import * as Icon from "react-bootstrap-icons";
 
 const AdminPage: React.FC = () => {
@@ -90,6 +91,7 @@ const AdminPage: React.FC = () => {
                 <div>
                     <div className={style.adminTitle}>admin</div>
                     <PostProductForm />
+                    <AdminProductList numberOfPages={numberOfPages} />
                 </div>
             ) : (
                 <div className={style.lockIconContainer}>

@@ -253,6 +253,25 @@ async function putProduct(
     }
 }
 
+async function deleteProduct(
+    token: string,
+    productId: number
+): Promise<{ data: { product: IProductWithCommentsAndRates } } | undefined> {
+    try {
+        const data = await axios({
+            method: "delete",
+            url: `http://localhost:3001/admin/edit-page?productId=${productId}`,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
+
+        return data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export {
     makeAuthorization,
     makeRegistration,
@@ -266,5 +285,6 @@ export {
     deleteComment,
     getAllProductsWithCategoryStructure,
     postProduct,
-    putProduct
+    putProduct,
+    deleteProduct
 };

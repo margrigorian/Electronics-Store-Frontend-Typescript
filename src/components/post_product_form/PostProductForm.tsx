@@ -44,7 +44,13 @@ const PostProductForm: React.FC = () => {
     });
 
     const onSubmit: SubmitHandler<IPostOrPutProductForm> = async data => {
+        console.log(data);
+
         const formData = new FormData();
+        if (data.id) {
+            // при put-запросе
+            formData.append("id", data.id);
+        }
         formData.append("image", data.image);
         formData.append("title", data.title);
         formData.append("description", data.description);
@@ -251,7 +257,7 @@ const PostProductForm: React.FC = () => {
                                     // setValue("image", selectedImage);
                                     // необходимо для put
                                     if (product) {
-                                        setValue("id", product.id);
+                                        setValue("id", String(product.id));
                                     }
                                     setValue("feildOfApplication", selectedFieldOfApplication);
                                     setValue("category", selectedCategory);

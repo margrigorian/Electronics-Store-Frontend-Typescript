@@ -24,7 +24,7 @@ const Reviews: React.FC<IGetProductFunction> = ({ getProduct }) => {
     return (
         <div className={style.evaluationContainer}>
             <div>CUSTOMER REVIEWS</div>
-            {product && product.comments.length > 0 ? (
+            {product && product.comments && product.comments.length > 0 ? (
                 <div className={style.reviewsContainer}>
                     {product.comments.map(el => (
                         <div key={`commentId-${el.comment_id}`} className={style.review}>
