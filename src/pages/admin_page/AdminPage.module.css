@@ -1,0 +1,23 @@
+.container {
+    min-height: 100vh;
+    padding: 40px;
+    background-color: rgb(246, 245, 245);
+    letter-spacing: 0.5px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.adminTitle {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 27px;
+    color: rgb(6, 130, 171);
+}
+
+.lockIconContainer {
+    margin-top: 13%;
+    text-align: center;
+    color: rgb(6, 130, 171);
+}
+.pleaseLoginText {
+    margin-top: 10px;
+    font-size: 18px;
+}

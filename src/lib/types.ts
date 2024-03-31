@@ -1,5 +1,3 @@
-// USER
-
 export interface IUseStateManagmentStore {
     isOpenedNavBarDrawer: boolean;
     isOpenedSmartHomeCategory: boolean;
@@ -20,6 +18,20 @@ export interface IUseStateManagmentStore {
     setActiveSubcategory: (subcategory: string) => void;
     setDefaultOrderRadio: (status: string) => void;
     setRenderOfAdminPage: (render: boolean) => void;
+}
+
+// USER
+
+export interface ILoginForm {
+    email: string;
+    password: string;
+}
+
+export interface IRegistrationForm {
+    username: string;
+    email: string;
+    password: string;
+    repeatedPassword?: string;
 }
 
 export interface IUseUserStore {
@@ -88,28 +100,6 @@ export interface IUseProductsStore {
     setUserComment: (comment: string) => void;
     setEvaluation: (action: string | null) => void;
     setError: (message: string | null) => void;
-}
-
-// product structure for admin
-
-interface IFeildOfApplicationStructure {
-    feildOfApplication: string;
-}
-
-interface ICategoriesStructure {
-    category: string;
-    fromFeildOfApplication: string;
-}
-
-interface ISubategoriesStructure {
-    subcategory: string;
-    fromCategory: string;
-}
-
-interface ITotalProductsStructure {
-    feildsOfApplication: IFeildOfApplicationStructure[];
-    categories: ICategoriesStructure[];
-    subcategories: ISubategoriesStructure[];
 }
 
 // For feildOfApplicationCategories and Products
@@ -188,16 +178,40 @@ export interface IUseFilters {
     setLimit: (value: number) => void;
 }
 
-// LOGIN
+// product structure for admin
 
-export interface ILoginForm {
-    email: string;
-    password: string;
+interface IFeildOfApplicationStructure {
+    feildOfApplication: string;
 }
 
-export interface IRegistrationForm {
-    username: string;
-    email: string;
-    password: string;
-    repeatedPassword?: string;
+interface ICategoriesStructure {
+    category: string;
+    fromFeildOfApplication: string;
+}
+
+interface ISubategoriesStructure {
+    subcategory: string;
+    fromCategory: string;
+}
+
+interface ITotalProductsStructure {
+    feildsOfApplication: IFeildOfApplicationStructure[];
+    categories: ICategoriesStructure[];
+    subcategories: ISubategoriesStructure[];
+}
+
+export interface IAllProductsWithStructure extends IProductListInfo {
+    structure: ITotalProductsStructure;
+}
+
+export interface IPostOrPutProductForm {
+    id?: number; // необходим в случае PUT
+    image: File;
+    title: string;
+    description: string;
+    feildOfApplication: string;
+    category: string;
+    subcategory: string;
+    quantity: string;
+    price: string;
 }
