@@ -12,7 +12,6 @@ const ProductCategoriesPage: React.FC = () => {
     const setError = useProducts(state => state.setError);
     const setActiveSubcategory = useStateManagment(state => state.setActiveSubcategory);
     const setLimit = useFilters(state => state.setLimit);
-    const setQuantity = useProducts(state => state.setQuantity);
     const setUserRate = useProducts(state => state.setUserRate);
 
     const currentPath = window.location.pathname;
@@ -70,7 +69,6 @@ const ProductCategoriesPage: React.FC = () => {
                                     <NavLink
                                         to={`/catalog/product/${item.id}`}
                                         onClick={() => {
-                                            setQuantity(1);
                                             setUserRate(null);
                                         }}
                                         key={`productId-${item.id}`}

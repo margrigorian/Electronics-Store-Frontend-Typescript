@@ -6,7 +6,10 @@ import {
     ICategories,
     IProductListInfo,
     IProductWithCommentsAndRates,
-    IAllProductsWithStructure
+    IAllProductsWithStructure,
+    IBasketProduct,
+    IUserOrderedProduct,
+    IConfirmedOrderedProduct
 } from "./types";
 
 interface IResponse<T> {
@@ -18,9 +21,15 @@ type Message = {
     message: string;
 };
 
-async function makeAuthorization(
-    body: ILoginForm
-): Promise<IResponse<{ message: string; user: IUser }> | undefined> {
+async function makeAuthorization(body: ILoginForm): Promise<
+    | IResponse<{
+          message: string;
+          user: IUser;
+          basket: IBasketProduct[];
+          orders: IConfirmedOrderedProduct[];
+      }>
+    | undefined
+> {
     // undefined из-за catch
     try {
         const data = await axios({
@@ -116,6 +125,101 @@ async function getProduct(
     try {
         const data = await axios.get(`http://localhost:3001/catalog/product/${id}`);
         return data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getUpdatedUserBasketAndOrders(
+    token: string
+): Promise<
+    IResponse<{ basket: IBasketProduct[]; orders: IConfirmedOrderedProduct[] }> | undefined
+> {
+    try {
+        const data = await axios({
+            method: "get",
+            url: `http://localhost:3001/user/basket/`,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                authorization: `Bearer ${token}`
+            }
+        });
+
+        return data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function postProductToBasket(productId: number, token: string): Promise<void> {
+    try {
+        const data = await axios({
+            method: "post",
+            url: `http://localhost:3001/catalog/product/${productId}`,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log(data.data);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function putQuantityOfProductInBasket(
+    productId: number,
+    quantity: number,
+    token: string
+): Promise<void> {
+    try {
+        const data = await axios({
+            method: "put",
+            url: `http://localhost:3001/user/basket/`,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                authorization: `Bearer ${token}`
+            },
+            data: JSON.stringify({ productId, quantity })
+        });
+
+        console.log(data.data);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function deleteProductFromUserBasket(productId: number, token: string): Promise<void> {
+    try {
+        const data = await axios({
+            method: "delete",
+            url: `http://localhost:3001/user/basket?productId=${productId}`,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log(data.data);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function makePurchase(products: IUserOrderedProduct[], token: string): Promise<void> {
+    try {
+        const data = await axios({
+            method: "post",
+            url: "http://localhost:3001/user/basket/",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                authorization: `Bearer ${token}`
+            },
+            data: JSON.stringify({ order: products })
+        });
+
+        console.log(data.data);
     } catch (err) {
         console.log(err);
     }
@@ -279,6 +383,11 @@ export {
     getProductList,
     getSearchProductList,
     getProduct,
+    postProductToBasket,
+    putQuantityOfProductInBasket,
+    deleteProductFromUserBasket,
+    makePurchase,
+    getUpdatedUserBasketAndOrders,
     postRate,
     putRate,
     postComment,

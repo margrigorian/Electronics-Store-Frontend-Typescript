@@ -2,10 +2,11 @@ import style from "./ProductPage.module.css";
 import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useProducts, useUser } from "../../store/store";
-import { getProduct } from "../../lib/request";
+import { useProducts, useUser, useBasket } from "../../store/store";
+import { getProduct, postProductToBasket } from "../../lib/request";
 import UserReview from "../../components/user_review/UserReview";
 import Reviews from "../../components/reviews/Reviews";
+import { IBasketProduct } from "../../lib/types";
 import * as Icon from "react-bootstrap-icons";
 import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
 
@@ -14,9 +15,13 @@ const ProductPage: React.FC = () => {
     let { id } = useParams(); // или же в сторе сохранять id?
     const product = useProducts(state => state.product);
     const setProduct = useProducts(state => state.setProduct);
+    const basket = useBasket(state => state.basket);
+    let productExistenceInBasket: IBasketProduct | undefined = undefined;
+    if (id) {
+        productExistenceInBasket = basket.find(el => el.id === Number(id));
+    }
+    const addProductToBasket = useBasket(state => state.addProductToBasket);
     const setError = useProducts(state => state.setError);
-    const quantity = useProducts(state => state.quantity);
-    const setQuantity = useProducts(state => state.setQuantity);
     const setUserRate = useProducts(state => state.setUserRate);
 
     useEffect(() => {
@@ -90,26 +95,8 @@ const ProductPage: React.FC = () => {
                                 <div className={style.description}>{product.description}</div>
                                 {product.quantity > 0 ? (
                                     <div className={style.quantityContainer}>
-                                        <div className={style.quantityTitle}>Quantity</div>
-                                        <button
-                                            onClick={() => {
-                                                setQuantity(quantity - 1);
-                                            }}
-                                            disabled={quantity > 1 ? false : true}
-                                            className={style.minusButton}
-                                        >
-                                            &ndash;
-                                        </button>
-                                        <div className={style.quantity}>{quantity}</div>
-                                        <button
-                                            onClick={() => {
-                                                setQuantity(quantity + 1);
-                                            }}
-                                            disabled={quantity < product.quantity ? false : true}
-                                            className={style.plusButton}
-                                        >
-                                            +
-                                        </button>
+                                        <div className={style.quantityTitle}>Stock quantity</div>
+                                        <span className={style.quantity}>{product.quantity}</span>
                                     </div>
                                 ) : (
                                     <div className={style.outOfStockText}>Product out of stock</div>
@@ -123,12 +110,39 @@ const ProductPage: React.FC = () => {
                                 )}
                                 <div className={style.addButtonContainer}>
                                     <button
-                                        disabled={user && product.quantity > 0 ? false : true}
-                                        className={
-                                            user ? style.addProductButton : style.disabledButton
+                                        disabled={
+                                            user &&
+                                            !productExistenceInBasket &&
+                                            product.quantity > 0
+                                                ? false
+                                                : true
                                         }
+                                        className={
+                                            user && !productExistenceInBasket
+                                                ? style.addProductButton
+                                                : style.disabledButton
+                                        }
+                                        onClick={() => {
+                                            if (!productExistenceInBasket) {
+                                                addProductToBasket({
+                                                    id: product.id,
+                                                    title: product.title,
+                                                    image: product.image,
+                                                    orderedQuantity: 1,
+                                                    availableQuantity: product.quantity,
+                                                    price: product.price,
+                                                    checked: false
+                                                });
+                                                if (user) {
+                                                    // проверку требует типизация
+                                                    postProductToBasket(product.id, user.token);
+                                                }
+                                            }
+                                        }}
                                     >
-                                        ADD TO BASKET
+                                        {!productExistenceInBasket
+                                            ? "ADD TO BASKET"
+                                            : "ADDED TO BASKET"}
                                     </button>
                                     <div className={style.iconsContainer}>
                                         <Icon.Heart size={"18px"} className={style.cursor} />

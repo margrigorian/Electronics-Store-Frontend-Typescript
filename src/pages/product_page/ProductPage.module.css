@@ -61,31 +61,18 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+    font-weight: bold;
 }
 .quantityTitle {
-    margin-right: 20px;
+    margin-right: 10px;
     color: rgb(6, 130, 171);
-    font-weight: bold;
     letter-spacing: 0.5px;
 }
-.minusButton {
-    padding: 0 5px 1px 5px;
-    background-color: white;
-    border: 1px solid;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.plusButton {
-    padding: 1px 5px 0 5px;
-    background-color: white;
-    border: 1px solid;
-    border-radius: 4px;
-    cursor: pointer;
-}
 .quantity {
-    width: 20px;
-    margin: 0 4px;
-    text-align: center;
+    color: black;
+    padding: 3px 6px;
+    border: 1px solid rgb(6, 130, 171);
+    border-radius: 5px;
 }
 .outOfStockText {
     color: rgb(6, 130, 171, 0.6);

@@ -1,0 +1,75 @@
+.productContainer {
+    width: 492px;
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: white;
+}
+.productImage {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(168, 166, 166);
+    border-radius: 5px;
+    margin-right: 20px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+.productInfoContainer {
+    width: 340px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.5px;
+}
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productTitle {
+    font-weight: 600;
+    color: rgb(6, 130, 171);
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.titleNavLink {
+    text-decoration: none;
+}
+.explanatoryText {
+    color: grey;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.productPriceInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.amountContainer {
+    text-align: end;
+}
+.price {
+    font-weight: bold;
+    color: rgb(6, 130, 171);
+}
+
+.quantityContainer {
+    display: flex;
+    font-size: 14px;
+    align-items: flex-end;
+}
+.quantityTitle {
+    margin-right: 15px;
+    color: grey;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.quantity {
+    padding: 2px 0;
+    width: 30px;
+    text-align: center;
+    border: 1px solid rgb(6, 130, 171);
+    border-radius: 5px;
+}

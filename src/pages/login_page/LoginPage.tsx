@@ -3,13 +3,16 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { makeAuthorization } from "../../lib/request";
-import { useUser } from "../../store/store";
+import { useBasket, useUser } from "../../store/store";
 import { ILoginForm } from "../../lib/types";
 
 const LoginPage: React.FC = () => {
     const message = useUser(state => state.authenticationMessage);
     const setAuthenticationMessage = useUser(state => state.setAuthenticationMessage);
     const setUser = useUser(state => state.setUser);
+    const setBasket = useBasket(state => state.setBasket);
+    const setOrderNumbers = useBasket(state => state.setOrderNumbers);
+    const setOrders = useBasket(state => state.setOrders);
     const setError = useUser(state => state.setError);
 
     const {
@@ -23,15 +26,28 @@ const LoginPage: React.FC = () => {
 
     const onSubmit: SubmitHandler<ILoginForm> = async data => {
         // наш хэндлер
-        console.log(data);
         const serverAnswer = await makeAuthorization(data);
 
         // при ошибке на сервере будет undefined, нужна проверка
         if (serverAnswer) {
             if (serverAnswer.data) {
                 setAuthenticationMessage(serverAnswer.data.message);
-                console.log(serverAnswer.data.user);
                 setUser(serverAnswer.data.user);
+                // добавляем ключ checked для контроля размещения товара в currentOrder
+                const basket = serverAnswer.data.basket.map(el => {
+                    el = { ...el, checked: false };
+                    return el;
+                });
+                setBasket(basket);
+                // создаем массив номеров заказов для будущей отрисовки в user orders
+                const orderNumbers: number[] = [];
+                serverAnswer.data.orders.forEach(el => {
+                    if (!orderNumbers.includes(el.order_id)) {
+                        orderNumbers.push(el.order_id);
+                    }
+                });
+                setOrderNumbers(orderNumbers);
+                setOrders(serverAnswer.data.orders);
             } else if (serverAnswer.error) {
                 // при наличии ошибки
                 setError(serverAnswer.error.message);

@@ -20,7 +20,6 @@ const SearchPage: React.FC = () => {
     const products = useProducts(state => state.products);
     const setProducts = useProducts(state => state.setProducts);
     const setError = useProducts(state => state.setError);
-    const setQuantity = useProducts(state => state.setQuantity);
     const setUserRate = useProducts(state => state.setUserRate);
     // FILTERS
     const search = useFilters(state => state.search);
@@ -149,7 +148,6 @@ const SearchPage: React.FC = () => {
                                     <NavLink
                                         to={`/catalog/product/${el.id}`}
                                         onClick={() => {
-                                            setQuantity(1);
                                             setUserRate(null);
                                         }}
                                         key={`productId-${el.id}`}

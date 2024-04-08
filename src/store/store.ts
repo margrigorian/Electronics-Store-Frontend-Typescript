@@ -4,7 +4,8 @@ import {
     IUseStateManagmentStore,
     IUseUserStore,
     IUseProductsStore,
-    IUseFilters
+    IUseFilters,
+    IUseBasket
 } from "../lib/types";
 
 export const useStateManagment = create<IUseStateManagmentStore>(set => ({
@@ -56,8 +57,6 @@ export const useProducts = create<IUseProductsStore>(set => ({
     product: null,
     // для страницы Admin Page, общее количество товаров в базе
     length: null,
-    // для контроля выбора количества товара на Product Page
-    quantity: 1,
     userRate: null,
     userComment: "",
     evaluation: null,
@@ -79,7 +78,6 @@ export const useProducts = create<IUseProductsStore>(set => ({
     setLength: length => set({ length: length }),
     // ДЛЯ Product Page
     setProduct: product => set({ product: product }),
-    setQuantity: value => set({ quantity: value }),
     setUserRate: value => set({ userRate: value }),
     setEvaluation: action => set({ evaluation: action }),
     setUserComment: comment => set({ userComment: comment }),
@@ -102,4 +100,71 @@ export const useFilters = create<IUseFilters>(set => ({
     setOrder: value => set({ order: value }),
     setPage: value => set({ page: value }),
     setLimit: value => set({ limit: value })
+}));
+
+export const useBasket = create<IUseBasket>(set => ({
+    basket: [],
+    orderNumbers: [],
+    orders: [],
+    currentOrder: [],
+
+    setBasket: productArr => set({ basket: productArr }),
+    addProductToBasket: product =>
+        set(state => {
+            return { basket: [...state.basket, product] };
+        }),
+    chooseProduct: productId =>
+        set(state => {
+            return {
+                basket: state.basket.map(el => {
+                    if (el.id === productId) {
+                        el.checked = !el.checked;
+                        return el;
+                    } else {
+                        return el;
+                    }
+                })
+            };
+        }),
+    updateQuantityOfProductInBasket: productParams =>
+        set(state => {
+            return {
+                basket: state.basket.map(el => {
+                    if (el.id === productParams.id) {
+                        el.orderedQuantity = productParams.quantity;
+                        return el;
+                    } else {
+                        return el;
+                    }
+                }),
+                // чтобы для purchase всегда была актуальная информация
+                currentOrder: state.currentOrder.map(el => {
+                    if (el.productId === productParams.id) {
+                        el.quantity = productParams.quantity;
+                        return el;
+                    } else {
+                        return el;
+                    }
+                })
+            };
+        }),
+    deleteProductFromBasket: productId =>
+        set(state => {
+            return {
+                basket: state.basket.filter(el => el.id !== productId),
+                currentOrder: state.currentOrder.filter(el => el.productId !== productId)
+            };
+        }),
+    setOrderNumbers: orderNumbers => set({ orderNumbers: orderNumbers }),
+    setOrders: productArr => set({ orders: productArr }),
+    setCurrentOrder: () => set({ currentOrder: [] }),
+    addProductToCurrentOrder: product =>
+        set(state => {
+            return { currentOrder: [...state.currentOrder, product] };
+        }),
+    // убираем галочку, убирая из currentOrder
+    deleteProductFromCurrentOrder: productId =>
+        set(state => {
+            return { currentOrder: state.currentOrder.filter(el => el.productId !== productId) };
+        })
 }));

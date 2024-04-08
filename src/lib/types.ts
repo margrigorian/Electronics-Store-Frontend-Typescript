@@ -73,7 +73,6 @@ export interface IUseProductsStore {
     // productPage
     product: IProduct | IProductWithCommentsAndRates | null;
     // для контроля выбора количества товара на Product Page
-    quantity: number;
     userRate: number | null;
     userComment: string;
     evaluation: string | null;
@@ -95,7 +94,6 @@ export interface IUseProductsStore {
     setLength: (length: number) => void;
     // ДЛЯ Product Page
     setProduct: (product: IProduct | IProductWithCommentsAndRates | null) => void;
-    setQuantity: (value: number) => void;
     setUserRate: (value: number | null) => void;
     setUserComment: (comment: string) => void;
     setEvaluation: (action: string | null) => void;
@@ -215,4 +213,50 @@ export interface IPostOrPutProductForm {
     subcategory: string;
     quantity: string;
     price: string;
+}
+
+// BASKET
+
+export interface IUseBasket {
+    basket: IBasketProduct[];
+    orderNumbers: number[];
+    orders: IConfirmedOrderedProduct[];
+    currentOrder: IUserOrderedProduct[];
+
+    setBasket: (arr: IBasketProduct[]) => void;
+    addProductToBasket: (obj: IBasketProduct) => void;
+    chooseProduct: (id: number) => void;
+    updateQuantityOfProductInBasket: (obj: { id: number; quantity: number }) => void;
+    deleteProductFromBasket: (id: number) => void;
+    setOrderNumbers: (arr: number[]) => void;
+    setOrders: (arr: IConfirmedOrderedProduct[]) => void;
+    setCurrentOrder: () => void;
+    addProductToCurrentOrder: (obj: IUserOrderedProduct) => void;
+    deleteProductFromCurrentOrder: (id: number) => void;
+}
+
+export interface IBasketProduct {
+    id: number;
+    title: string;
+    image: string;
+    orderedQuantity: number;
+    availableQuantity: number;
+    price: number;
+    checked: boolean;
+}
+
+export interface IUserOrderedProduct {
+    productId: number;
+    price: number;
+    quantity: number;
+}
+
+export interface IConfirmedOrderedProduct {
+    order_id: number;
+    product_id: number;
+    product_title: string;
+    product_image: string;
+    product_price: number;
+    quantity: number;
+    user_id: number;
 }

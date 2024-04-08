@@ -1,0 +1,103 @@
+.productContainer {
+    width: 492px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    margin-right: 80px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 15px;
+}
+.checkboxAndTrashIconContainer {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+.productImage {
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(6, 130, 171);
+    border-radius: 5px;
+    margin-right: 20px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+.productInfoContainer {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.5px;
+    /* background-color: rgb(237, 240, 240, 0.4); */
+}
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productTitle {
+    font-weight: 600;
+    color: rgb(6, 130, 171);
+    cursor: pointer;
+}
+.titleNavLink {
+    text-decoration: none;
+}
+.productPriceInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.amountContainer {
+    text-align: end;
+}
+.amountTitle {
+    color: grey;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+.price {
+    font-weight: bold;
+    color: rgb(6, 130, 171);
+}
+
+.quantityContainer {
+    font-size: 14px;
+}
+.quantityTitle {
+    margin-right: 20px;
+    margin-bottom: 7px;
+    color: grey;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+}
+.minusButton {
+    padding: 0 5px 1px 5px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.plusButton {
+    padding: 1px 5px 0 5px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.quantity {
+    width: 20px;
+    margin: 0 4px;
+    text-align: center;
+}

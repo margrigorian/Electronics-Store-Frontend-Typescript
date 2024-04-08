@@ -1,7 +1,7 @@
 import style from "./NavBar.module.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useStateManagment, useUser, useProducts, useFilters } from "../../store/store";
+import { useStateManagment, useUser, useProducts, useFilters, useBasket } from "../../store/store";
 import NavBarDrawer from "../navbar_drawer/NavBarDrawer";
 import SearchDrawer from "../search_drawer/SearchDrawer";
 import * as Icon from "react-bootstrap-icons";
@@ -18,6 +18,7 @@ const NavBar: React.FC = () => {
 
     // отображать необходимость логина по цвету иконки
     const user = useUser(state => state.user);
+    const basket = useBasket(state => state.basket);
     // чтобы login форма отрисовывалась, а не висело сообщение об авторизации
     const setAuthenticationMessage = useUser(state => state.setAuthenticationMessage);
     // закрытие при переходах filterDrawer
@@ -113,49 +114,58 @@ const NavBar: React.FC = () => {
                         }}
                         className={style.cursor}
                     />
-                    <NavLink
-                        to={
-                            user
-                                ? user.status === "admin"
-                                    ? "admin/edit-page"
-                                    : "/user/basket"
-                                : window.location
-                        }
-                        onClick={() => {
-                            // необходимо после перехода с Product Page
-                            setProduct(null);
-                            // filter param
-                            setSearch("");
-                            setActiveSubcategory("");
-                            changeStatusOfFilterDrawer(false);
-                            setDefaultOrderRadio("");
-                            setOrder("");
-                            setPage(1);
-                        }}
-                        className={style.userIcon}
-                    >
-                        <Icon.PersonCircle size={20} color={"black"} className={style.cursor} />
-                    </NavLink>
-                    <NavLink
-                        to={"/authentication/login"}
-                        onClick={() => {
-                            // filter param
-                            setSearch("");
-                            setActiveSubcategory("");
-                            changeStatusOfFilterDrawer(false);
-                            setDefaultOrderRadio("");
-                            setOrder("");
-                            setPage(1);
-                            // ...
-                            setAuthenticationMessage(null);
-                        }}
-                        className={style.loginIcon}
-                    >
-                        <Icon.BoxArrowInRight
-                            size={25}
-                            className={user ? style.blackLoginIcon : style.blueLoginIcon}
-                        />
-                    </NavLink>
+                    <div className={style.userIconContainer}>
+                        <NavLink
+                            to={
+                                user
+                                    ? user.status === "admin"
+                                        ? "admin/edit-page"
+                                        : "/user/basket"
+                                    : window.location
+                            }
+                            onClick={() => {
+                                // необходимо после перехода с Product Page
+                                setProduct(null);
+                                // filter param
+                                setSearch("");
+                                setActiveSubcategory("");
+                                changeStatusOfFilterDrawer(false);
+                                setDefaultOrderRadio("");
+                                setOrder("");
+                                setPage(1);
+                            }}
+                            className={style.userIcon}
+                        >
+                            <Icon.PersonCircle size={20} color={"black"} className={style.cursor} />
+                            {user && basket.length > 0 && (
+                                <span>
+                                    <sup>
+                                        <button className={style.basketSup}>{basket.length}</button>
+                                    </sup>
+                                </span>
+                            )}
+                        </NavLink>
+                        <NavLink
+                            to={"/authentication/login"}
+                            onClick={() => {
+                                // filter param
+                                setSearch("");
+                                setActiveSubcategory("");
+                                changeStatusOfFilterDrawer(false);
+                                setDefaultOrderRadio("");
+                                setOrder("");
+                                setPage(1);
+                                // ...
+                                setAuthenticationMessage(null);
+                            }}
+                            className={style.loginIcon}
+                        >
+                            <Icon.BoxArrowInRight
+                                size={25}
+                                className={user ? style.blackLoginIcon : style.blueLoginIcon}
+                            />
+                        </NavLink>
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@
     box-shadow: 0px 0px 15px grey;
 }
 .navbarList {
-    width: 300px;
+    width: 310px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -46,14 +46,25 @@
 .infoChapter:hover {
     color: rgb(6, 130, 171);
 }
+.userIconContainer {
+    display: flex;
+    margin-left: 5px;
+}
 .userIcon {
     display: flex;
     align-items: center;
+    width: 45px;
+}
+.basketSup {
+    padding-left: 6px;
+    background-color: white;
+    border: none;
+    font-size: 12px;
+    color: rgb(6, 130, 171);
 }
 .loginIcon {
     display: flex;
     align-items: center;
-    margin-left: -4px;
 }
 .blackLoginIcon {
     color: black;
